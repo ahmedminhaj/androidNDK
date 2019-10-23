@@ -14,21 +14,48 @@
         android:layout_marginTop="50dp"
         app:srcCompat="@drawable/logo3"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:textColor="#050505"
+        android:textSize="20dp"
+        android:text="@string/name"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:textColor="#080808"
+        android:textSize="20dp"
+        android:text="@string/email"/>
+
     <Button
-        android:id="@+id/get_current_time"
+        android:id="@+id/button_logIn"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:orientation="horizontal"
         android:textColor="#FFFFFF"
         android:background="#488B4B"
-        android:onClick="getCurrentTime"
         android:text="@string/logged_time"/>
+
     <TextView
-        android:id="@+id/current_time_view"
+        android:id="@+id/login_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
         android:textSize="25sp" />
+
+
+    <ListView
+        android:id="@+id/logInList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:padding="10dp"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:divider="#346F37"
+        android:dividerHeight="3dp"
+        android:textColor="#080808"/>
+
 
 </LinearLayout>

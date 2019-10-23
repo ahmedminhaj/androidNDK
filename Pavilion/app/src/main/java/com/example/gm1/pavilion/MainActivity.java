@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    EditText mTextUsername;
+    EditText mTextEmail;
     EditText mTextPassword;
     Button mButtonSignin;
     TextView mTextViewSignup;
@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextUsername = (EditText)findViewById(R.id.edittext_username);
+        mTextEmail = (EditText)findViewById(R.id.edittext_email);
         mTextPassword = (EditText)findViewById(R.id.edittext_password);
         mButtonSignin = (Button)findViewById(R.id.button_singin);
         mTextViewSignup = (TextView)findViewById(R.id.textview_singup);
