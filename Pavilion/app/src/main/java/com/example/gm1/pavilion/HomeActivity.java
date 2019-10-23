@@ -1,6 +1,6 @@
 package com.example.gm1.pavilion;
 
-import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -17,7 +17,7 @@ public class HomeActivity extends AppCompatActivity {
 
     ListView mListView;
     ArrayAdapter aAdapter;
-    String[] logList = {"22/10/2019  11:25:45 am","21/10/2019  11:10:45 am", "20/10/2019  11:20:45 am"};
+    String[] logList = {"22/10/2019  11:25:45 am","21/10/2019  11:10:45 am", "20/10/2019  11:20:45 am", "19/10/2019  10:40:45 am"};
     Button mButtonLogIn;
 
     @Override
@@ -26,6 +26,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         mListView = (ListView) findViewById(R.id.logInList);
         aAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, logList);
+
         mListView.setAdapter(aAdapter);
         mButtonLogIn = (Button)findViewById(R.id.button_logIn);
         mButtonLogIn.setVisibility(View.VISIBLE);

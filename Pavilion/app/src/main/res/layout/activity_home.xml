@@ -44,18 +44,16 @@
         android:text=""
         android:textSize="25sp" />
 
-
     <ListView
         android:id="@+id/logInList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:background="#488B4B"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="60dp"
         android:padding="10dp"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        android:divider="#346F37"
-        android:dividerHeight="3dp"
-        android:textColor="#080808"/>
-
+        android:textSize="20dp"
+        android:divider="#FFFFFF"
+        android:dividerHeight="3dp"/>
 
 </LinearLayout>
