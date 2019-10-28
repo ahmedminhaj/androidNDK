@@ -12,6 +12,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 import okhttp3.ResponseBody;
@@ -26,7 +29,6 @@ public class SignUpActivity extends AppCompatActivity {
     Button mButtonSignup;
     TextView mTextViewSignin;
 
-private static final String REGISTER_URL="https://peddlecloud.com/pavdev/api/auth/user_registration";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +65,7 @@ private static final String REGISTER_URL="https://peddlecloud.com/pavdev/api/aut
         String android_id = Secure.getString(getApplicationContext().getContentResolver(),
                 Secure.ANDROID_ID);
 
+
         if(name.isEmpty()){
             mTextUsername.setError("Name required");
             mTextUsername.requestFocus();
@@ -83,21 +86,38 @@ private static final String REGISTER_URL="https://peddlecloud.com/pavdev/api/aut
             mTextPassword.requestFocus();
             return;
         }
+        if(password.length() < 6){
+            mTextPassword.setError("Password require 6 digit length");
+            mTextPassword.requestFocus();
+            return;
+        }
         /* User registration using api call */
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .createUser(role_id, email, password, name, android_id);
+                .createUser(role_id, name, email, password, android_id);
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                String s = null;
                 try{
-                    String s = response.body().string();
-                    Toast.makeText(SignUpActivity.this, s, Toast.LENGTH_SHORT).show();
-
+                    if(response.code() == 200) {
+                        s = response.body().string();
+                    }
+                    else{
+                        s = response.errorBody().string();
+                    }
                 }catch(IOException e){
                     e.printStackTrace();
+                }
+                if(s != null){
+                    try {
+                        JSONObject jsonObject = new JSONObject(s);
+                        Toast.makeText(SignUpActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                    }catch(JSONException e){
+                        e.printStackTrace();
+                    }
                 }
             }
 

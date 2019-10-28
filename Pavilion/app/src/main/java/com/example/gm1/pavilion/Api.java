@@ -11,9 +11,18 @@ public interface Api {
     @POST(value = "auth/user_registration")
     Call<ResponseBody> createUser(
             @Field("role_id") int role_id,
-            @Field("email") String email,
             @Field("name") String name,
+            @Field("email") String email,
             @Field("password") String password,
             @Field("android_id") String android_id
+
+    );
+
+    @FormUrlEncoded
+    @POST(value = "auth/user_login")
+    Call<SignInRespose> userSignIn(
+            @Field("email") String email,
+            @Field("password") String password,
+            @Field("role_id") int role_id
     );
 }
