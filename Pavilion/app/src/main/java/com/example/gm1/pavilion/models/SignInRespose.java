@@ -1,4 +1,4 @@
-package com.example.gm1.pavilion;
+package com.example.gm1.pavilion.models;
 
 public class SignInRespose {
     private boolean status;

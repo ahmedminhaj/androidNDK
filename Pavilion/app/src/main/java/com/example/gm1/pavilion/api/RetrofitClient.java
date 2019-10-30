@@ -1,4 +1,4 @@
-package com.example.gm1.pavilion;
+package com.example.gm1.pavilion.api;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

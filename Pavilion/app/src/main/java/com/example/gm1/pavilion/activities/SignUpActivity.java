@@ -1,16 +1,24 @@
-package com.example.gm1.pavilion;
+package com.example.gm1.pavilion.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings.Secure;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.gm1.pavilion.R;
+import com.example.gm1.pavilion.api.RetrofitClient;
+import com.example.gm1.pavilion.storage.SharedPrefManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,6 +36,8 @@ public class SignUpActivity extends AppCompatActivity {
     EditText mTextEmail;
     Button mButtonSignup;
     TextView mTextViewSignin;
+    CheckBox mShowPassword;
+
 
 
     @Override
@@ -37,9 +47,25 @@ public class SignUpActivity extends AppCompatActivity {
 
         mTextUsername = (EditText)findViewById(R.id.edittext_name);
         mTextPassword = (EditText)findViewById(R.id.edittext_password);
+        mShowPassword = (CheckBox)findViewById(R.id.show_password);
         mTextEmail = (EditText)findViewById(R.id.edittext_email);
         mButtonSignup = (Button)findViewById(R.id.button_singup);
         mTextViewSignin = (TextView)findViewById(R.id.textview_signin);
+
+        //password visibility option
+        mShowPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    //show password
+                    mTextPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }else{
+                    //hide password
+                    mTextPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+            }
+        });
+
         mTextViewSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,6 +73,7 @@ public class SignUpActivity extends AppCompatActivity {
                 startActivity(signInIntent);
             }
         });
+
         mButtonSignup.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -55,6 +82,17 @@ public class SignUpActivity extends AppCompatActivity {
                 userSignUp();
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(SharedPrefManager.getInstance(this).isLoggedIn()){
+            Intent homeIntent = new Intent(this,HomeActivity.class);
+            homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(homeIntent);
+        }
     }
 
     private void userSignUp() {

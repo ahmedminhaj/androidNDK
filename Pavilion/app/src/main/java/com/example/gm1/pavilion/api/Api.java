@@ -1,4 +1,6 @@
-package com.example.gm1.pavilion;
+package com.example.gm1.pavilion.api;
+
+import com.example.gm1.pavilion.models.SignInRespose;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;

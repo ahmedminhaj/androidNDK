@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".activities.MainActivity"
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
@@ -23,17 +27,27 @@
 
     <EditText
         android:id="@+id/edittext_email"
-        android:layout_width="150dp"
+        android:layout_width="230dp"
         android:layout_height="40dp"
         android:layout_marginTop="100dp"
         android:hint="@string/email"/>
 
+
     <EditText
         android:id="@+id/edittext_password"
-        android:layout_width="150dp"
+        android:layout_width="230dp"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
+        android:inputType="textPassword"
         android:hint="@string/password"/>
+
+    <CheckBox
+        android:id="@+id/show_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Password"
+        android:textColor="#494C49"
+        />
 
     <Button
         android:id="@+id/button_singin"
@@ -44,6 +58,7 @@
         android:textColor="#FFFFFF"
         android:background="#488B4B"
         android:text="@string/sing_in"/>
+
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -65,5 +80,8 @@
     </LinearLayout>
 
 </LinearLayout>
+
+</ScrollView>
+
 
 
