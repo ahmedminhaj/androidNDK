@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // open registration/sign up page
+        // redirect registration/sign up page
         mTextViewSignup.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+    //user login validation
     private void userSingIn() {
         String email = mTextEmail.getText().toString().trim();
         String password = mTextPassword.getText().toString().trim();

@@ -65,7 +65,7 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
         });
-
+        //redirect to login/sign in page
         mTextViewSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,12 +73,11 @@ public class SignUpActivity extends AppCompatActivity {
                 startActivity(signInIntent);
             }
         });
-
+        //sign up page
         mButtonSignup.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent nowSignInIntent = new Intent(SignUpActivity.this,MainActivity.class);
-                startActivity(nowSignInIntent);
+                //user registration method
                 userSignUp();
             }
         });
@@ -95,6 +94,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
+    //new user registration validation method
     private void userSignUp() {
         String email = mTextEmail.getText().toString().trim();
         String password = mTextPassword.getText().toString().trim();
@@ -138,6 +138,7 @@ public class SignUpActivity extends AppCompatActivity {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
                 String s = null;
                 try{
                     if(response.code() == 200) {
@@ -152,7 +153,17 @@ public class SignUpActivity extends AppCompatActivity {
                 if(s != null){
                     try {
                         JSONObject jsonObject = new JSONObject(s);
-                        Toast.makeText(SignUpActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                        if(jsonObject.getBoolean("status")) {
+
+                            Toast.makeText(SignUpActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+
+                            Intent HomeIntent = new Intent(SignUpActivity.this, HomeActivity.class);
+                            startActivity(HomeIntent);
+
+                        }
+                        else{
+                            Toast.makeText(SignUpActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                        }
                     }catch(JSONException e){
                         e.printStackTrace();
                     }

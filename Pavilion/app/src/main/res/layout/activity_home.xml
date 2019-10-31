@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,14 +16,14 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="127dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         app:srcCompat="@drawable/logo3"/>
 
     <TextView
         android:id="@+id/edittext_name"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:textColor="#050505"
         android:textSize="25dp"
         android:textAllCaps="true"/>
@@ -28,7 +32,7 @@
         android:id="@+id/button_logIn"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:textColor="#FFFFFF"
         android:background="#488B4B"
@@ -38,10 +42,10 @@
         android:id="@+id/button_logOff"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:textColor="#FFFFFF"
-        android:background="#841B14"
+        android:background="#8A251E"
         android:text="@string/Exit"/>
 
 
@@ -63,16 +67,52 @@
         android:textColor="#080808"
         android:textSize="25sp" />
 
-    <ListView
-        android:id="@+id/logInList"
-        android:layout_width="wrap_content"
-        android:layout_height="180dp"
-        android:layout_marginTop="50dp"
-        android:background="#D8D8D8"
-        android:divider="#306732"
-        android:dividerHeight="3dp"
-        android:padding="10dp"
-        android:textSize="20dp" />
+    <Button
+        android:id="@+id/attendance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        android:textColor="#333333"
+        android:background="#75AE79"
+        android:baselineAligned="false"
+        android:text="@string/attendance"/>
+
+    <Button
+        android:id="@+id/catering"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:textColor="#333333"
+        android:background="#75AE79"
+        android:baselineAligned="false"
+        android:text="@string/catering"/>
+
+    <Button
+        android:id="@+id/leaveManage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:textColor="#333333"
+        android:background="#75AE79"
+        android:baselineAligned="false"
+        android:text="@string/leave_manage"/>
+
+    <Button
+        android:id="@+id/button_signOut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:textColor="#333333"
+        android:baselineAligned="false"
+        android:background="#E0736E"
+        android:text="@string/sign_out"/>
+
+
 
 
 </LinearLayout>
+</ScrollView>

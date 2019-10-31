@@ -1,5 +1,6 @@
 package com.example.gm1.pavilion.api;
 
+import com.example.gm1.pavilion.models.EntryExitResponse;
 import com.example.gm1.pavilion.models.SignInRespose;
 
 import okhttp3.ResponseBody;
@@ -26,5 +27,17 @@ public interface Api {
             @Field("email") String email,
             @Field("password") String password,
             @Field("role_id") int role_id
+    );
+
+    @FormUrlEncoded
+    @POST(value = "user/user_entry_time")
+    Call<EntryExitResponse> entryTime(
+            @Field("user_id") int user_id
+    );
+
+    @FormUrlEncoded
+    @POST(value = "user/user_exit_time")
+    Call<EntryExitResponse> exitTime(
+            @Field("user_id") int user_id
     );
 }
