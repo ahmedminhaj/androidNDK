@@ -40,4 +40,11 @@ public interface Api {
     Call<EntryExitResponse> exitTime(
             @Field("user_id") int user_id
     );
+
+    @FormUrlEncoded
+    @POST(value = "user/user_time_check")
+    Call<EntryExitResponse> timeChecker(
+            @Field("user_id") int user_id
+    );
+
 }

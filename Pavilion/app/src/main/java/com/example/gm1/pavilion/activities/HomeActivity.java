@@ -24,6 +24,9 @@ public class HomeActivity extends AppCompatActivity {
     Button mButtonLogIn;//entry time button
     Button mButtonLogOff;//exit time button
     Button mButtonSignOut;//account sign out
+    Button mAttendance;
+    Button mCatering;
+    Button mLeaveManagement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,37 +37,50 @@ public class HomeActivity extends AppCompatActivity {
         User user = SharedPrefManager.getInstance(this).getData(); //user data
         mUserName.setText(user.getName()); //show user name
 
+        mAttendance = findViewById(R.id.attendance);
+        mCatering = findViewById(R.id.catering);
+        mLeaveManagement = findViewById(R.id.leaveManage);
+
         mButtonSignOut = findViewById(R.id.button_signOut);
+
         mButtonLogIn = findViewById(R.id.button_logIn);
         mButtonLogOff = findViewById(R.id.button_logOff);
-        mButtonLogIn.setVisibility(View.VISIBLE);
-        mButtonLogOff.setVisibility(View.GONE);
+//        mButtonLogIn.setVisibility(View.VISIBLE);
+//        mButtonLogOff.setVisibility(View.GONE);
 
-        //entry time button
-        mButtonLogIn.setOnClickListener(new View.OnClickListener() {
+
+        //entry and exit time checker
+        timeChecker();
+
+
+        //redirect to attendance list page
+        mAttendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mButtonLogIn.setVisibility(View.GONE);
-                mButtonLogOff.setVisibility(View.VISIBLE);
-                mButtonLogIn.postDelayed(new Runnable() {
-                    public void run() {
-                        mButtonLogIn.setVisibility(View.VISIBLE);
-                    }
-                }, 600000);
-
-                entryTime();
+                Intent attendanceIntent = new Intent(HomeActivity.this,AttendanceActivity.class);
+                startActivity(attendanceIntent);
             }
         });
 
-        //exit time button
-        mButtonLogOff.setOnClickListener(new View.OnClickListener() {
+        //redirect to catering service
+        mCatering.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mButtonLogOff.setVisibility(View.GONE);
-
-                exitTime();
+                Intent attendanceIntent = new Intent(HomeActivity.this,CateringActivity.class);
+                startActivity(attendanceIntent);
             }
         });
+
+        //redirect to leave management
+        mLeaveManagement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent attendanceIntent = new Intent(HomeActivity.this,LeaveManageActivity.class);
+                startActivity(attendanceIntent);
+            }
+        });
+
+
 
         //account sign out
         mButtonSignOut.setOnClickListener(new View.OnClickListener() {
@@ -75,16 +91,78 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    //account signOut method
-    private void signOut(){
-        SharedPrefManager.getInstance(this).clear();
-        Intent homeIntent = new Intent(this,MainActivity.class);
-        homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(homeIntent);
+    //time checker method
+    private void timeChecker(){
+        User user = SharedPrefManager.getInstance(this).getData();
+        int user_id = user.getId();
+
+        Call<EntryExitResponse> call = RetrofitClient
+                .getInstance()
+                .getApi()
+                .timeChecker(user_id);
+
+        call.enqueue(new Callback<EntryExitResponse>() {
+            @Override
+            public void onResponse(Call<EntryExitResponse> call, Response<EntryExitResponse> response) {
+                EntryExitResponse timeCheckResponse = response.body();
+                //entry time checker
+                if(timeCheckResponse.isStatus()){
+                    if(timeCheckResponse.getEntry_time() != null && timeCheckResponse.getExit_time() == null){
+                        TextView textView = findViewById(R.id.login_time);
+                        textView.setText(" Entry Time: " + timeCheckResponse.getEntry_time());
+                        //exit time button
+//                        mButtonLogOff = findViewById(R.id.button_logOff);
+                        mButtonLogOff.setVisibility(View.VISIBLE);
+                        mButtonLogIn.setVisibility(View.GONE);
+                        mButtonLogOff.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mButtonLogIn.setVisibility(View.GONE);
+                                mButtonLogOff.setVisibility(View.GONE);
+
+                                exitTime();
+                            }
+                        });
+                    }else{
+                        mButtonLogIn.setVisibility(View.GONE);
+                        mButtonLogOff.setVisibility(View.GONE);
+                        TextView textView = findViewById(R.id.login_time);
+                        textView.setText(" Entry Time: " + timeCheckResponse.getEntry_time());
+                        TextView textViewExit = findViewById(R.id.logoff_time);
+                        textViewExit.setText(" Exit Time: " + timeCheckResponse.getExit_time());
+                    }
+                }else{
+                    //entry time button
+                    //mButtonLogIn = findViewById(R.id.button_logIn);
+                    mButtonLogIn.setVisibility(View.VISIBLE);
+                    mButtonLogIn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mButtonLogIn.setVisibility(View.GONE);
+                            mButtonLogOff.setVisibility(View.VISIBLE);
+                            /*
+                            mButtonLogIn.postDelayed(new Runnable() {
+                                public void run() {
+                                    mButtonLogIn.setVisibility(View.VISIBLE);
+                                }
+                            }, 57600000);
+                            */
+                            entryTime();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EntryExitResponse> call, Throwable t) {
+
+            }
+        });
     }
 
     //entry time method
     private void entryTime(){
+//        mButtonLogIn.setVisibility(View.GONE);
         User user = SharedPrefManager.getInstance(this).getData();
         int user_id = user.getId();
 
@@ -144,6 +222,14 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    //account signOut method
+    private void signOut(){
+        SharedPrefManager.getInstance(this).clear();
+        Intent homeIntent = new Intent(this,MainActivity.class);
+        homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(homeIntent);
     }
 
     @Override

@@ -15,7 +15,9 @@
     <string name="Entry">Entry Time</string>
     <string name="sign_out">Sign Out</string>
     <string name="attendance">Attendance</string>
-    <string name="catering">Catering</string>
+    <string name="catering">Pavilion Catering Service</string>
     <string name="leave_manage">Leave Management</string>
+    <string name="home_button">Home</string>
+    <string name="leave_management">Leave Management</string>
 
 </resources>
