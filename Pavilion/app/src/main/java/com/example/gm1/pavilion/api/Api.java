@@ -1,5 +1,6 @@
 package com.example.gm1.pavilion.api;
 
+import com.example.gm1.pavilion.models.AttendanceResponse;
 import com.example.gm1.pavilion.models.EntryExitResponse;
 import com.example.gm1.pavilion.models.SignInRespose;
 
@@ -47,4 +48,9 @@ public interface Api {
             @Field("user_id") int user_id
     );
 
+    @FormUrlEncoded
+    @POST(value = "user/user_timing_list")
+    Call<AttendanceResponse> timingList(
+            @Field("user_id") int user_id
+    );
 }

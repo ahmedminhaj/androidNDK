@@ -31,11 +31,5 @@
             android:background="#488B4B"
             android:text="@string/home_button"/>
 
-        <ListView
-            android:id="@+id/list_catering"
-            android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:layout_marginTop="50dp"></ListView>
-
     </LinearLayout>
 </ScrollView>

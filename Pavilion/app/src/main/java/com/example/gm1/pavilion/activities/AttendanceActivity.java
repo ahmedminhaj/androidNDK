@@ -11,16 +11,23 @@ import android.widget.Button;
 
 import com.example.gm1.pavilion.R;
 import com.example.gm1.pavilion.adapter.ListAdapter;
+import com.example.gm1.pavilion.api.RetrofitClient;
 import com.example.gm1.pavilion.models.AttendanceList;
+import com.example.gm1.pavilion.models.AttendanceResponse;
+import com.example.gm1.pavilion.models.User;
+import com.example.gm1.pavilion.storage.SharedPrefManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class AttendanceActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
-    List<AttendanceList> attendanceLists;
+    List<AttendanceList> data;
     Button mHome;
 
     @Override
@@ -42,21 +49,33 @@ public class AttendanceActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        attendanceLists = new ArrayList<>();
+        data = new ArrayList<>();
 
-        for(int i = 0; i<=10; i++){
-            AttendanceList attendanceList = new AttendanceList(
-                    "Date" + (i+1),
-                    "Entry Time",
-                    "Exit Time"
-            );
+        loadRecyclerViewData();
 
-            attendanceLists.add(attendanceList);
         }
-        adapter = new ListAdapter(attendanceLists, this);
-        recyclerView.setAdapter(adapter);
+
+        private void loadRecyclerViewData(){
+            User user = SharedPrefManager.getInstance(this).getData();
+            int user_id = user.getId();
+            Call<AttendanceResponse> call = RetrofitClient
+                    .getInstance()
+                    .getApi()
+                    .timingList(user_id);
+            call.enqueue(new Callback<AttendanceResponse>() {
+                @Override
+                public void onResponse(Call<AttendanceResponse> call, Response<AttendanceResponse> response) {
+                    AttendanceResponse attendanceResponse = response.body();
+                    adapter = new ListAdapter(attendanceResponse.getData(), getApplicationContext());
+                    recyclerView.setAdapter(adapter);
+                }
+                @Override
+                public void onFailure(Call<AttendanceResponse> call, Throwable t) {
+                }
+            });
+        }
 
     }
 
-}
+
 

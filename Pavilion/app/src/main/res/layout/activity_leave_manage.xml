@@ -31,11 +31,11 @@
             android:background="#488B4B"
             android:text="@string/home_button"/>
 
-        <ListView
-            android:id="@+id/list_leave"
-            android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:layout_marginTop="50dp"></ListView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Coming Soon..."
+            android:textSize="20dp"/>
 
     </LinearLayout>
 </ScrollView>

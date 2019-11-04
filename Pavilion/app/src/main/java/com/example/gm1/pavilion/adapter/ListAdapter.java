@@ -36,9 +36,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         AttendanceList attendanceList =attendanceLists.get(position);
 
-        holder.aDate.setText(attendanceList.getDate());
-        holder.aEntry.setText(attendanceList.getEntry_time());
-        holder.aExit.setText(attendanceList.getExit_time());
+        holder.aDate.setText("Date : " + attendanceList.getDate());
+        holder.aEntry.setText("Entry Time : " + attendanceList.getEntry_time());
+        holder.aExit.setText("Exit Time : " + attendanceList.getExit_time());
+
     }
 
     @Override
