@@ -31,5 +31,24 @@
             android:background="#488B4B"
             android:text="@string/home_button"/>
 
+        <Button
+            android:id="@+id/button_place_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:textColor="#223E22"
+            android:background="#89AF8A"
+            android:text="Place Order"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:padding="15dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:id="@+id/catering_recyclerView"/>
+
+
+
     </LinearLayout>
 </ScrollView>

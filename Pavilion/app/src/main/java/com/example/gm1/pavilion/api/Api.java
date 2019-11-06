@@ -1,6 +1,7 @@
 package com.example.gm1.pavilion.api;
 
 import com.example.gm1.pavilion.models.AttendanceResponse;
+import com.example.gm1.pavilion.models.CateringResponse;
 import com.example.gm1.pavilion.models.EntryExitResponse;
 import com.example.gm1.pavilion.models.SignInRespose;
 
@@ -52,5 +53,25 @@ public interface Api {
     @POST(value = "user/user_timing_list")
     Call<AttendanceResponse> timingList(
             @Field("user_id") int user_id
+    );
+
+    @FormUrlEncoded
+    @POST(value = "catering/user_catering_order_create")
+    Call<ResponseBody> saveOrder(
+            @Field("user_id") int user_id,
+            @Field("date") String date,
+            @Field("comment") String comment
+    );
+
+    @FormUrlEncoded
+    @POST(value = "catering/user_catering_list")
+    Call<CateringResponse> cateringList(
+            @Field("user_id") int user_id
+    );
+
+    @FormUrlEncoded
+    @POST(value = "catering/user_catering_order_delete")
+    Call<CateringResponse> deleteMeal(
+            @Field("id") int id
     );
 }
