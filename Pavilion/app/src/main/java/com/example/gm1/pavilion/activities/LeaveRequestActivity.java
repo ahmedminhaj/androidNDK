@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -32,28 +31,28 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MealOrderActivity extends AppCompatActivity {
+public class LeaveRequestActivity extends AppCompatActivity {
 
-    private static  final String TAG = "MealOrderActivity";
-    Button mCatering;
-    Button mOrder;
+    Button mLeaveRedirect;
     TextView mDatePicker;
-    EditText mComment;
+    Button mRequestNow;
+    EditText mLeaveCause;
+
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_meal_order);
+        setContentView(R.layout.activity_leave_request);
 
-        mComment = (EditText)findViewById(R.id.foodRemark);
+        mLeaveCause = (EditText)findViewById(R.id.leave_cause);
 
-        mCatering = (Button)findViewById(R.id.button_catering_redirect);
-        mCatering.setOnClickListener(new View.OnClickListener() {
+        mLeaveRedirect = (Button)findViewById(R.id.button_leave_redirect);
+        mLeaveRedirect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent HomeIntent = new Intent(MealOrderActivity.this,CateringActivity.class);
-                startActivity(HomeIntent);
+                Intent LeaveManagementIntent = new Intent(LeaveRequestActivity.this,LeaveManageActivity.class);
+                startActivity(LeaveManagementIntent);
             }
         });
 
@@ -67,7 +66,7 @@ public class MealOrderActivity extends AppCompatActivity {
                 int day = cal.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog dialog = new DatePickerDialog(
-                        MealOrderActivity.this,
+                        LeaveRequestActivity.this,
                         android.R.style.Theme_Holo_Dialog_MinWidth,
                         mDateSetListener,
                         year,month,day);
@@ -84,11 +83,11 @@ public class MealOrderActivity extends AppCompatActivity {
             }
         };
 
-        mOrder = (Button)findViewById(R.id.orderMeal);
-        mOrder.setOnClickListener(new View.OnClickListener() {
+        mRequestNow = (Button)findViewById(R.id.request_now);
+        mRequestNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveOrderNow();
+                leaveRequestNow();
             }
         });
     }
@@ -115,21 +114,28 @@ public class MealOrderActivity extends AppCompatActivity {
         return monthName;
     }
 
-    private void saveOrderNow(){
+    private void leaveRequestNow(){
         User user = SharedPrefManager.getInstance(this).getData();
         int user_id = user.getId();
-        String comment = mComment.getText().toString().trim();
+        int type = 1;
         String date = mDatePicker.getText().toString().trim();
+        String comment = mLeaveCause.getText().toString().trim();
 
         if(date.isEmpty()){
             mDatePicker.setError("Date required");
             mDatePicker.requestFocus();
             return;
         }
+        if(comment.isEmpty()){
+            mLeaveCause.setError("Cause Require");
+            mLeaveCause.requestFocus();
+            return;
+        }
+
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .saveOrder(user_id, date, comment);
+                .requestNow(user_id, type, date, comment);
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -150,14 +156,14 @@ public class MealOrderActivity extends AppCompatActivity {
                         JSONObject jsonObject = new JSONObject(s);
                         if(jsonObject.getBoolean("status")) {
 
-                            Toast.makeText(MealOrderActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LeaveRequestActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
 
-                            Intent cateringIntent = new Intent(MealOrderActivity.this, CateringActivity.class);
+                            Intent cateringIntent = new Intent(LeaveRequestActivity.this, LeaveManageActivity.class);
                             startActivity(cateringIntent);
 
                         }
                         else{
-                            Toast.makeText(MealOrderActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LeaveRequestActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
                         }
                     }catch(JSONException e){
                         e.printStackTrace();

@@ -14,8 +14,8 @@ import android.widget.Toast;
 import com.example.gm1.pavilion.R;
 import com.example.gm1.pavilion.adapter.CateringAdapter;
 import com.example.gm1.pavilion.api.RetrofitClient;
-import com.example.gm1.pavilion.models.CateringList;
-import com.example.gm1.pavilion.models.CateringResponse;
+import com.example.gm1.pavilion.models.list.CateringList;
+import com.example.gm1.pavilion.models.response.CateringResponse;
 import com.example.gm1.pavilion.models.User;
 import com.example.gm1.pavilion.storage.SharedPrefManager;
 
@@ -61,6 +61,7 @@ public class CateringActivity extends AppCompatActivity {
         cateringRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         data = new ArrayList<>();
+        cateringRecyclerViewData();
 
 //        for(int i =0; i<=10; i++){
 //            CateringList cateringList = new CateringList(
@@ -73,7 +74,6 @@ public class CateringActivity extends AppCompatActivity {
 //        }
 //        adapter = new CateringAdapter(data, this);
 //        cateringRecyclerView.setAdapter(adapter);
-        cateringRecyclerViewData();
     }
 
     private void cateringRecyclerViewData(){

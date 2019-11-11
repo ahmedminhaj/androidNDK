@@ -10,7 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.gm1.pavilion.R;
 import com.example.gm1.pavilion.api.RetrofitClient;
-import com.example.gm1.pavilion.models.EntryExitResponse;
+import com.example.gm1.pavilion.models.response.EntryExitResponse;
 import com.example.gm1.pavilion.models.User;
 import com.example.gm1.pavilion.storage.SharedPrefManager;
 

@@ -1,9 +1,11 @@
 package com.example.gm1.pavilion.api;
 
-import com.example.gm1.pavilion.models.AttendanceResponse;
-import com.example.gm1.pavilion.models.CateringResponse;
-import com.example.gm1.pavilion.models.EntryExitResponse;
-import com.example.gm1.pavilion.models.SignInRespose;
+import com.example.gm1.pavilion.models.response.AttendanceResponse;
+import com.example.gm1.pavilion.models.response.CateringResponse;
+import com.example.gm1.pavilion.models.response.EntryExitResponse;
+import com.example.gm1.pavilion.models.response.LeaveManageResponse;
+import com.example.gm1.pavilion.models.response.OvertimeResponse;
+import com.example.gm1.pavilion.models.response.SignInRespose;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -73,5 +75,37 @@ public interface Api {
     @POST(value = "catering/user_catering_order_delete")
     Call<CateringResponse> deleteMeal(
             @Field("id") int id
+    );
+
+    @FormUrlEncoded
+    @POST(value = "leave/user_leave_create")
+    Call<ResponseBody> requestNow(
+            @Field("user_id") int user_id,
+            @Field("type") int type,
+            @Field("date") String date,
+            @Field("comment") String comment
+    );
+
+    @FormUrlEncoded
+    @POST(value = "leave/user_overtime_create")
+    Call<ResponseBody> overtimeRequestNow(
+            @Field("user_id") int user_id,
+            @Field("type") int type,
+            @Field("date") String date,
+            @Field("comment") String comment
+    );
+
+    @FormUrlEncoded
+    @POST(value = "leave/user_leave_list")
+    Call<LeaveManageResponse> leaveList(
+            @Field("user_id") int user_id,
+            @Field("type") int type
+    );
+
+    @FormUrlEncoded
+    @POST(value = "leave/user_overtime_list")
+    Call<OvertimeResponse> overtimeList(
+            @Field("user_id") int user_id,
+            @Field("type") int type
     );
 }

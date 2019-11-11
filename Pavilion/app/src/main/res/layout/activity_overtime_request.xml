@@ -5,13 +5,13 @@
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        tools:context=".activities.MealOrderActivity">
+        tools:context=".activities.OvertimeRequestActivity">
 
         <TextView
             android:layout_width="wrap_content"
@@ -20,17 +20,17 @@
             android:textColor="#467A46"
             android:layout_marginTop="10dp"
             android:textSize="25dp"
-            android:text="Place Your Meal"/>
+            android:text="Request For Overtime"/>
 
         <Button
-            android:id="@+id/button_catering_redirect"
+            android:id="@+id/button_leave_redirect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:orientation="horizontal"
             android:textColor="#FFFFFF"
             android:background="#488B4B"
-            android:text="Catering"/>
+            android:text="Leave management"/>
 
 
         <TextView
@@ -51,25 +51,25 @@
             android:textStyle="bold"/>
 
         <EditText
-            android:id="@+id/foodRemark"
+            android:id="@+id/overtime_cause"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:hint="if any requirement"
+            android:hint="cause of leave"
             android:textSize="15dp"
             android:textAlignment="center"
             android:layout_marginTop="100dp" />
 
         <Button
-            android:id="@+id/orderMeal"
+            android:id="@+id/request_now"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="Order Now"
+            android:text="Request Now"
             android:textSize="20dp"
             android:layout_marginTop="15dp"
             android:textStyle="bold"
             android:textColor="#4E754E"
             android:textAllCaps="true"/>
 
-        </LinearLayout>
+    </LinearLayout>
 </ScrollView>

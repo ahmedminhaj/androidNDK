@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gm1.pavilion.R;
 import com.example.gm1.pavilion.api.RetrofitClient;
-import com.example.gm1.pavilion.models.CateringList;
-import com.example.gm1.pavilion.models.CateringResponse;
+import com.example.gm1.pavilion.models.list.CateringList;
+import com.example.gm1.pavilion.models.response.CateringResponse;
 
 import java.util.List;
 

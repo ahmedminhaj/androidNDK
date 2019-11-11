@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gm1.pavilion.R;
-import com.example.gm1.pavilion.models.AttendanceList;
+import com.example.gm1.pavilion.models.list.AttendanceList;
 
 import java.util.List;
 

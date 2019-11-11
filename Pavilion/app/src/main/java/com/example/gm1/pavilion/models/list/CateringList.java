@@ -1,4 +1,4 @@
-package com.example.gm1.pavilion.models;
+package com.example.gm1.pavilion.models.list;
 
 public class CateringList {
     int id;

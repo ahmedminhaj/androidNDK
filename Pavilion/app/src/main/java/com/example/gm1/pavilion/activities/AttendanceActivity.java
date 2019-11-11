@@ -13,8 +13,8 @@ import android.widget.Toast;
 import com.example.gm1.pavilion.R;
 import com.example.gm1.pavilion.adapter.ListAdapter;
 import com.example.gm1.pavilion.api.RetrofitClient;
-import com.example.gm1.pavilion.models.AttendanceList;
-import com.example.gm1.pavilion.models.AttendanceResponse;
+import com.example.gm1.pavilion.models.list.AttendanceList;
+import com.example.gm1.pavilion.models.response.AttendanceResponse;
 import com.example.gm1.pavilion.models.User;
 import com.example.gm1.pavilion.storage.SharedPrefManager;
 

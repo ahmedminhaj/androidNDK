@@ -1,4 +1,6 @@
-package com.example.gm1.pavilion.models;
+package com.example.gm1.pavilion.models.response;
+
+import com.example.gm1.pavilion.models.list.AttendanceList;
 
 import java.util.List;
 
